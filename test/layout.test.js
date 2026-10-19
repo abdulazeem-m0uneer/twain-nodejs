@@ -53,7 +53,8 @@ describe("module", () => {
 
   test("strings round-trip through TW_STR fields", () => {
     const identity = {
-      Id: 0,
+      // A TW_MEMREF on the Mac, where a NULL pointer decodes as null.
+      Id: twain.TWH_CMP_OSX ? null : 0,
       Version: { MajorNum: 1, MinorNum: 2, Language: 0, Country: 0, Info: "1.2" },
       ProtocolMajor: twain.TWON_PROTOCOLMAJOR,
       ProtocolMinor: twain.TWON_PROTOCOLMINOR,

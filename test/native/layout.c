@@ -31,8 +31,15 @@ typedef struct { const char *type; const char *member; size_t offset; } MemberOf
  * Fake Data Source Manager                                                 *
  ****************************************************************************/
 
-#ifdef _WIN32
-#define FAKE_EXPORT __declspec(dllexport)
+#if defined(_WIN32)
+/* twain.h already declares DSM_Entry without dllexport, and MSVC rejects a
+ * definition that changes its linkage (C2375), so export it via the linker. */
+#define FAKE_EXPORT
+#if defined(_WIN64)
+#pragma comment(linker, "/EXPORT:DSM_Entry")
+#else
+#pragma comment(linker, "/EXPORT:DSM_Entry=_DSM_Entry@24")
+#endif
 #else
 #define FAKE_EXPORT __attribute__((visibility("default")))
 #endif
