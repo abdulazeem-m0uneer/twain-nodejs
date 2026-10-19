@@ -1,40 +1,44 @@
 {
   "name": "twain-nodejs",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "Node.js type definitions, struct layouts, function prototypes and constants for the TWAIN image acquisition API, built on koffi.",
   "main": "lib/twainh.js",
+  "files": [
+    "lib"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha -gc --reporter mocha-junit-reporter"
+    "lint": "eslint .",
+    "pretest": "node test/native/generate.js && node-gyp rebuild --directory test/native",
+    "test": "node --test \"test/*.test.js\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/poode/twain-nodejs.git"
+    "url": "git+https://github.com/abdulazeem-m0uneer/twain-nodejs.git"
   },
   "author": "Abdulazeem Mohammed <eng.abdul.azeem@gmail.com>",
   "keywords": [
     "twain",
+    "scanner",
+    "image-acquisition",
     "struct",
-    "ref",
-    "c",
-    "c++",
-    "ffi"
+    "ffi",
+    "koffi"
   ],
   "bugs": {
-    "url": "https://github.com/poode/twain-nodejs/issues"
+    "url": "https://github.com/abdulazeem-m0uneer/twain-nodejs/issues"
   },
-  "homepage": "https://github.com/poode/twain-nodejs#readme",
+  "homepage": "https://github.com/abdulazeem-m0uneer/twain-nodejs#readme",
   "license": "MIT",
   "dependencies": {
-    "ffi-napi": "^4.0.1",
-    "ref-array-napi": "^1.2.1",
-    "ref-napi": "^3.0.1",
-    "ref-struct-napi": "^1.1.1",
-    "ref-union-napi": "^1.0.2",
-    "nan": "^2.12.1"
+    "koffi": "^3.3.3"
   },
   "devDependencies": {
-    "bindings": "^1.4.0",
-    "mocha": "^5.2.0",
-    "mocha-junit-reporter": "^1.18.0"
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
+    "node-gyp": "^13.1.0"
   }
 }
